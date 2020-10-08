@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+  <style>
+    
+    .navbar {
+      box-shadow: 1px 1px 0.5em var(--light-gray);
+    }
+    .col-md-6 {
+      box-shadow: 1px 1px 0.5em var(--light-gray);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid d-flex justify-content-center my-5">
+<div class="col-md-6 my-3">
+  <form class="form-horizontal px-2 py-3" action="" method="post">
+    <h5 class="text-center">Register</h5>
+    {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">{{ field.label }}</label>
+          {{ field }}
+          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
+      {% endfor %}
+     
+      <input type="submit" name="Register" value="Register" class="btn btn-cta">
+  </form>
+<p>Already have an account ?<a href="{% url 'user:login' %}"> Login.</a></p>
+</div>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/addControlClass.js' %}"></script>
+{% endblock %}

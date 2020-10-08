@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+  <style>
+    .navbar {
+      box-shadow: 1px 1px 0.5em var(--light-gray);
+    }
+    .col-md-6 {
+      box-shadow: 1px 1px 0.5em var(--light-gray);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5 d-flex justify-content-center">
+<div class="col-md-6 my-5">
+  <form class="form-horizontal py-3 px-3" action="" method="post">
+    <h5 class="text-center">Login</h5>
+    {% csrf_token %}
+      {{ form }}
+      <input type="submit" name="Login" value="Login" class="btn btn-cta mt-2">
+  </form>
+  <p>Don't have an account? <a href="{% url 'user:register' %}"> Register.</a></p>
+</div>
+
+</div>
+{% endblock %}
+{% block javascript %}
+<script src="{% static 'js/addControlClass.js' %}"></script>
+{% endblock %}

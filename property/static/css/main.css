@@ -1,0 +1,62 @@
+:root {
+    --brand-color:#ec877b;
+    --primary:#ec958c;
+    --brand-cta:#ec958c;
+    --gray:#555;
+    --dark-gray:#474e5d;
+    --light-gray:#7e7e7e;
+    --extra-light-gray:#b4b4b4;
+    --white:#fff;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.navbar-brand {
+    color:var(--brand-color) !important;
+    font-weight: 800;
+}
+
+.navbar-collapse {
+    justify-content: center;
+}
+
+.nav-link:hover {
+    border-bottom: 1px solid var(--brand-color);
+}
+
+.text-brand  {
+    color:var(--brand-color);
+}
+
+.btn-cta {
+    background-color: var(--brand-cta) !important;
+    color: var(--white);
+}
+
+.btn-cta:hover, .btn-cta:focus {
+    background-color: var(--brand-color) !important;
+    color: white;
+}
+
+.btn-brand {
+    background-color: var(--brand-cta) !important;
+    color: var(--white);
+    transition: all 0.3s;
+}
+
+.btn-brand:hover {
+    color: white;
+    transform: scale(1.2);
+}
+
+.img-thumbnail {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.bg-extra-light {
+    background-color: var(--extra-light-gray);
+}

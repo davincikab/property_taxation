@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load road_tags %}
+{% load static %}
+{% block title %} Profile {% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid my-5 d-flex justify-content-center">
+    <div class="col-md-6">
+        <form class="form-horizontal" action="" method="post">
+            {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="id_number">{{ form.id_number.label}}</label>
+                    {{ form.id_number }}
+                  </div>
+        
+                  <div class="form-group col-md-6">
+                    <label for="phone_number">{{ form.phone_number.label }}</label>
+                    {{ form.phone_number }}
+                  </div>
+              </div>
+        
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="department">{{ form.department.label}}</label>
+                    {{ form.department }}
+                  </div>
+        
+                  <div class="form-group col-md-6">
+                    <label for="employee_status">{{ form.employee_status.label }}</label>
+                    {{ form.employee_status }}
+                  </div>          
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ward">{{ form.ward.label}}</label>
+                    {{ form.ward }}
+                  </div>
+        
+                  <div class="form-group col-md-6">
+                    <label for="constituency">{{ form.constituency.label }}</label>
+                    {{ form.constituency }}
+                  </div>          
+              </div>
+
+              <div class="form-group">
+                <label for="county">{{ form.county.label }}</label>
+                {{ form.county }}
+              </div>
+
+              <div class="form-group">
+                <label for="profile_pic">{{ form.profile_pic.label }}</label>
+                {{ form.profile_pic }}
+              </div>
+        
+              <input type="submit" name="Login" value="Create Profile" class="btn btn-brand mt-2">
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/addControlClass.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,84 @@
+.navbar {
+    box-shadow: 2px 1px 0.5em var(--gray);
+    z-index: 1;
+}
+
+.container-fluid {
+    padding: 0;
+    display: flex;
+}
+
+.side-tab {
+    width:8vw;
+    height: 92vh;
+    background-color:var(--gray);
+    box-shadow: 2px 1px 0.5em var(--gray);
+}
+
+.main-tab {
+    width:92vw;
+    height: 92vh;
+    overflow-y: auto;
+    padding: 0.5em 1.5em;
+}
+
+.row {
+    width: 100%;
+}
+
+.row + .row {
+    margin-top: 1.5em;
+}
+
+.col-md-3 {
+    margin:0;
+    padding: 0;
+}
+
+.card {
+    padding: 0;
+    box-shadow: 1px 1px 0.2em var(--light-gray);
+    margin: 0.5em 0.5em 0 0;
+}
+
+.bold {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--brand-color);
+}
+
+.card-body {
+    padding:0.8em 0;
+    text-align: center;
+}
+
+.contractor .list-group {
+    height: 40vh;
+    overflow-y: auto;
+}
+
+.search-bar {
+    position: sticky;
+}
+
+.search-bar h4 {
+    font-size: 1.2em;
+}
+
+.list-group .list-group-item {
+    padding: 0.2em;
+}
+
+.list-group-horizontal {
+    width: 100%;
+}
+
+.badge-brand {
+    background-color: var(--primary);
+    color:var(--white);
+}
+@media (min-width:50em) {
+    /* .card {
+
+    } */
+}

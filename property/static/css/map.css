@@ -3,33 +3,41 @@
     z-index: 1;
 }
 
+.container-fluid {
+    display: flex;
+    padding: 0;
+}
+
 #map {
-    height: 92vh;
+    height: 100vh;
     width: 100%;
     z-index: 0;
 }
 
 .search-section {
     position: absolute;
-    top: 1%;
+    top: 3%;
     z-index: 1500;
     width: 73vw;
-    left: 12%;
+    left: 3%;
 }
 
 .search-result {
     cursor: pointer;
 }
 
-.filter-section {
-    position: absolute;
+.side-section {
     height: 100vh;
-    width:100%;
-    z-index: 1500;
+    width:5%;
     top: 0%;
-    background-color: var(--white);
+    background-color: var(--dark-gray);
     box-shadow: 2px 2px 0.4em var(--gray);
     transition: transform 0.5s ease-in-out;
+}
+
+.form-control {
+    background-color: var(--gray);
+    color:white;
 }
 
 .filter-section.collapse-filter {
@@ -48,47 +56,6 @@
     font-size: 2em;
     font-weight: 700;
     background-color: transparent;
-}
-
-/*  */
-.leaflet-touch .leaflet-bar {
-    border-width: 0px !important;
-}
-
-.leaflet-touch .leaflet-bar a:first-child {
-    margin-bottom: 3px;
-}
-
-.leaflet-touch .leaflet-control-layers {
-    border:0px;
-    border-radius: 50%;
-    padding: 4px;
-    box-shadow: 2px 2px 0.4em var(--gray);
-    background-color: var(--brand-color);
-}
-
-.leaflet-control.leaflet-control-layers-expanded {
-    border-radius: 2px !important;
-    background-color: var(--white) !important;
-}
-
-.leaflet-touch .leaflet-control-layers-toggle {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-}
-
-.leaflet-touch .leaflet-bar a{
-    padding: 0;
-    border-radius: 50% !important;
-    text-align: center;
-    color: var(--white);
-    font-weight: 500;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    background-color: var(--brand-color);
-    box-shadow: 2px 2px 0.2em var(--gray);
 }
 
 .leaflet-popup-content-wrapper{
@@ -179,18 +146,7 @@ label {
 @media (min-width:50em) {
     .search-section {
         width: 30%;
-        left:35%;
-    }
-
-    .filter-section {
-        height:92vh;
-        width:360px;
-        z-index: 1200;
-        top: 0%;
-    }
-
-    .filter-section.collapse-filter {
-        transform:translateX(-360px);
+        left:1%;
     }
 
 }

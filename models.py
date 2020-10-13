@@ -2,10 +2,10 @@ from django.contrib.gis.db import models
 
 
 class ParcelInfo(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=-1)
     plot_no = models.ForeignKey('Parcels', models.DO_NOTHING, db_column='plot_no', blank=True, null=True)
-    owner = models.CharField(max_length=255, blank=True, null=True)
-    arrears = models.CharField(max_length=100, blank=True, null=True)
+    owner = models.CharField(max_length=-1, blank=True, null=True)
+    arrears = models.CharField(max_length=-1, blank=True, null=True)
 
     class Meta:
         managed = False

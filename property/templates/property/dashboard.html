@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Map {% endblock %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid bg-light">
+        {% include '../sidenav.html' %}
+        <div class="row px-3">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title">50</h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                      2 days ago
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title">50</h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                      2 days ago
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title">50</h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                      2 days ago
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title">50</h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                      2 days ago
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+        </div>
+
+        <div class="row">
+            
+        </div>
+    </div>
+{% endblock %}
+   
+{% block javascript %}
+
+{% endblock %}

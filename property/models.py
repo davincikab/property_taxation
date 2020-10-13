@@ -21,3 +21,18 @@ class Parcels(models.Model):
     class Meta:
         managed = False
         db_table = 'parcels'
+
+class ParcelHistory(models.Model):
+    plot_no = models.BigIntegerField(null=False, blank="")
+    payed_on = models.DateTimeField("Payed On", auto_now=False, auto_now_add=False)
+    is_waived = models.BooleanField("Waiver", default=False)
+
+    class Meta:
+        verbose_name = _("")
+        verbose_name_plural = _("s")
+
+    def __str__(self):
+        return self.plot_no
+
+    # def get_absolute_url(self):
+    #     return reverse("_detail", kwargs={"pk": self.pk})

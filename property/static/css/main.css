@@ -1,17 +1,21 @@
 :root {
-    --brand-color:#ec877b;
-    --primary:#ec958c;
-    --brand-cta:#ec958c;
+    --brand-color:#0F4C5C;
+    --primary:#9A031E;
+    --brand-cta:#FB8B24;
+    --secondary:#5F0F40;
+    --tertiary:#E36414;
     --gray:#555;
     --dark-gray:#474e5d;
     --light-gray:#7e7e7e;
     --extra-light-gray:#b4b4b4;
-    --white:#fff;
+    --white:rgb(233, 233, 233);
     --dark-gray:#202124;
 }
 
 body {
     font-family: 'Nunito Sans', sans-serif;
+    margin: 0;
+    padding:0;
 }
 
 .navbar-brand {
@@ -60,4 +64,78 @@ body {
 
 .bg-extra-light {
     background-color: var(--extra-light-gray);
+}
+
+/* side Nav */
+
+.side-section {
+    position: fixed;
+    height: 100vh;
+    width:30%;
+    z-index: 1;
+    top: 0%;
+    background-color: var(--dark-gray);
+    box-shadow: 2px 2px 0.4em var(--gray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.side-section img {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    height: 80px;
+    width: 80px;
+    margin: 1%;
+    border-radius: 50%;
+    border:1px solid var(--white)
+}
+
+.list-item {
+    padding:0em;
+    margin-top:5em;
+}
+
+.list-item li {
+    padding: 0.2em;
+    /* border-bottom: 1px solid var(--white); */
+}
+
+.list-item li a {
+    color: var(--white);
+    font-size: 1em;
+    text-align: center;
+    display: flex;
+    justify-content: start;
+}
+
+a .fa  {
+    font-size: 1em;
+    margin-right:0.3em;
+    padding-top: 0.1em;
+}
+
+.btn-close {
+    position: absolute;
+    top: 0%;
+    right: 5%;
+    color: var(--white);
+    font-size: 1.5em;
+}
+
+@media (min-width:50em) {
+    .side-section {
+        width:15%;
+    }
+
+    .side-section img {
+        left: 2%;
+    }
+
+    a span {
+        display: block;
+    }
+
 }

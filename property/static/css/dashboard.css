@@ -5,7 +5,14 @@
 
 .container-fluid {
     padding: 0;
-    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container-fluid .row {
+    width: 85%;
+    margin-left: 0px;
+    float: right;
 }
 
 .side-tab {
@@ -39,6 +46,10 @@
     padding: 0;
     box-shadow: 1px 1px 0.2em var(--light-gray);
     margin: 0.5em 0.5em 0 0;
+}
+
+.card-footer {
+    padding: 0em;
 }
 
 .bold {

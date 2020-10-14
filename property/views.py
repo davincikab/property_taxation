@@ -7,6 +7,9 @@ from django.core.serializers import serialize
 # models
 from .models import ParcelInfo, Parcels
 
+# utils
+import json
+
 def landing_page(request):
     return render (request, 'property/landing.html')
 
@@ -20,8 +23,11 @@ def dashboard_view(request):
 
 # load the data
 def land_parcels(request):
+    # fetch related data
+    parcel_info = ParcelInfo.objects.select_related('plot_no')
+    parcelInfo = serialize('json', parcel_info)
     parcels = serialize('geojson', Parcels.objects.all())
-    return HttpResponse(parcels)
+    return HttpResponse(json.dumps([parcelInfo, parcels]))
 
 class ParcelDetail():
     pass

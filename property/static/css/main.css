@@ -70,9 +70,8 @@ body {
 
 .side-section {
     position: relative;
-    height: 100vh;
+    height: 92vh;
     width:100%;
-    z-index: 1;
     top: 0%;
     background-color: var(--dark-gray);
     box-shadow: 2px 0px 0.4em var(--gray);

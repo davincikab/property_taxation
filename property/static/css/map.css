@@ -1,6 +1,13 @@
 .navbar {
     box-shadow: 2px 1px 0.5em var(--gray);
     z-index: 1;
+    position: fixed;
+    top:0;
+    left:0;
+}
+
+.navbar-brand {
+    padding:0.5em 0.9em 0.5em;
 }
 
 .container-fluid {
@@ -8,10 +15,21 @@
     padding: 0;
 }
 
+.map {
+    margin: 50px 0 0 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.row div:last-child {
+    padding:0;
+}
+
 #map {
-    height: 100vh;
+    height: 92vh;
     width: 100%;
     z-index: 0;
+   
 }
 
 .search-section {
@@ -157,28 +175,10 @@ label {
     align-items: center;
 }
 
-@media (max-height:768px) {
-    a span {
-        display: none
-    }
-}
-
 @media (min-width:50em) {
     .search-section {
         width: 30%;
         left:1%;
-    }
-
-    .side-section {
-        width:15%;
-    }
-
-    .side-section img {
-        left: 2%;
-    }
-
-    a span {
-        display: block;
     }
 
 }

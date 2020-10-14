@@ -22,14 +22,20 @@ class Parcels(models.Model):
         managed = False
         db_table = 'parcels'
 
-class ParcelHistory(models.Model):
+class TaxationHistory(models.Model):
+    PAYMENT_MODE = (
+        ('MPESA', "M-PESA"),
+        ('Bank', "Bank")
+    )
+
     plot_no = models.BigIntegerField(null=False, blank="")
     payed_on = models.DateTimeField("Payed On", auto_now=False, auto_now_add=False)
     is_waived = models.BooleanField("Waiver", default=False)
+    payment_mode = models.CharField("Payment Method", max_length=50, choices=PAYMENT_MODE)
 
     class Meta:
-        verbose_name = _("")
-        verbose_name_plural = _("s")
+        verbose_name = "Tax History"
+        verbose_name_plural = "Tax History"
 
     def __str__(self):
         return self.plot_no

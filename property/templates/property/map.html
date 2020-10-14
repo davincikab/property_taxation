@@ -8,18 +8,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="map" id="map">
-        <div class="search-section">
-            <input type="text" class="form-control" id="search-input" name="search" placeholder="Search Parcel Number or Owner ..">
-    
-            <div class="search-result">
-                <ul class="list-group list-group-sm" id="search-result">
-                </ul>
-            </div>
-        </div>
+{% include '../nav.html' %}
+<div class="row map">
+    <div class="col-xs-12 col-sm-2">
+        {% include '../sidenav.html' %}
     </div>
-    
+    <div class="col-xs-12 col-sm-10">
+        <div class="">
+            <div class="" id="map">
+                <div class="search-section">
+                    <input type="text" class="form-control" id="search-input" name="search" placeholder="Search Parcel Number or Owner ..">
+            
+                    <div class="search-result">
+                        <ul class="list-group list-group-sm" id="search-result">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </div>
 

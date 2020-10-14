@@ -4,7 +4,8 @@ class Parcels(models.Model):
     id = models.BigIntegerField()
     geom = models.MultiPolygonField(srid=3857, blank=True, null=True)
     plot_no = models.BigIntegerField(primary_key=True)
-    owner = models.CharField(max_length=50, blank=True, null=True)
+    owner = models.CharField(max_length=50, blank=True, null=True),
+    zone = models.CharField("Parcel Zone", max_length=50, default="D")
 
     class Meta:
         managed = False

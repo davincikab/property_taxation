@@ -8,6 +8,7 @@
 
 .navbar-brand {
     padding: 0.5em 0.9em 0.5em;
+    width: 100%;
 }
 
 .container-fluid {
@@ -27,10 +28,13 @@
 
 .row {
     width: 100%;
-    /* margin: 0; */
 }
 
-.col-sm-2, .col-sm-10 {
+.col-sm-2 {
+    border-bottom: 1px solid white;
+}
+
+.col-sm-2, .col-sm-10, .col-sm-1, .col-sm-11 {
     padding:0;
 }
 

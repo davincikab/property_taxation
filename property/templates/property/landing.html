@@ -4,12 +4,14 @@
 
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/map.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
 {% endblock %}
 
 {% block content %}
-    {% include '../navbar.html' %}
-<h1>Landing</h1>
+{% include '../navbar.html' %}
+<div class="home">
+   <h2 class="bold text-white">MY PROPERTY TAX ASSISTANT</h2>
+</div>
 {% endblock %}
 
 {% block javascript %}

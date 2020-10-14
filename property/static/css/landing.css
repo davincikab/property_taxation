@@ -2,9 +2,9 @@
     background-color: transparent !important;
 }
 
-
 .navbar-brand {
     font-size: 1.5em;
+    color:var(--brand-cta) !important;
 }
 
 .nav-item {
@@ -35,7 +35,7 @@
 }
 
 .home {
-    background-image: url(/static/images/highway.jpg);
+    background-image: url(/media/property.jpg);
     height: 100vh;
     margin-top: -80px;
     background-size: cover;

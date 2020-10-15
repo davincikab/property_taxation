@@ -1,21 +1,30 @@
 {% extends 'base.html' %}
-{% load road_tags %}
 {% load static %}
 {% block title %} Profile {% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> -->
 {% endblock %}
 
 {% block content %}
+<style>
+  .navbar {
+    width: 100%;
+    box-shadow: 1px 1px 0.3em #343434;
+  }
+  .container {
+      margin-top: 80px;
+  }
+</style>
+{% include '../navbar.html' %}
 <div class="container-fluid my-5 d-flex justify-content-center">
     <div class="col-md-6">
         <form class="form-horizontal" action="" method="post">
             {% csrf_token %}
               <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="id_number">{{ form.id_number.label}}</label>
-                    {{ form.id_number }}
+                    <label for="id_number">{{ form.first_name.label}}</label>
+                    {{ form.first_name }}
                   </div>
         
                   <div class="form-group col-md-6">
@@ -26,39 +35,32 @@
         
               <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="department">{{ form.department.label}}</label>
-                    {{ form.department }}
+                    <label for="department">{{ form.last_name.label}}</label>
+                    {{ form.last_name }}
                   </div>
         
                   <div class="form-group col-md-6">
-                    <label for="employee_status">{{ form.employee_status.label }}</label>
-                    {{ form.employee_status }}
-                  </div>          
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="ward">{{ form.ward.label}}</label>
-                    {{ form.ward }}
-                  </div>
-        
-                  <div class="form-group col-md-6">
-                    <label for="constituency">{{ form.constituency.label }}</label>
-                    {{ form.constituency }}
+                    <label for="employee_status">{{ form.surname.label }}</label>
+                    {{ form.surname }}
                   </div>          
               </div>
 
               <div class="form-group">
-                <label for="county">{{ form.county.label }}</label>
-                {{ form.county }}
+                <label for="county">{{ form.email.label }}</label>
+                {{ form.email }}
               </div>
 
               <div class="form-group">
-                <label for="profile_pic">{{ form.profile_pic.label }}</label>
-                {{ form.profile_pic }}
+                <label for="profile_pic">{{ form.image.label }}</label>
+                {{ form.image }}
               </div>
-        
-              <input type="submit" name="Login" value="Create Profile" class="btn btn-brand mt-2">
+              
+              {% if form.email.value %}
+                <input type="submit" name="Login" value="Update Profile" class="btn btn-brand mt-2">
+              {% else %}
+                <input type="submit" name="Login" value="Create Profile" class="btn btn-brand mt-2">
+              {% endif %}
+              
         </form>
     </div>
 </div>

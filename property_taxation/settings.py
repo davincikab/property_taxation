@@ -21,7 +21,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'property',
-    'user',
     'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -111,13 +111,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-
 AUTH_USER_MODEL = 'user.User'
+
+LOGIN_REDIRECT_URL = "/user/account"
+LOGOUT_REDIRECT_URL = "/"
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "property/static")
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 GDAL_LIBRARY_PATH = 'C:/OSGeo4W64/bin/gdal204'
 GEOS_LIBRARY_PATH = 'C:/Program Files/PostgreSQL/12/bin/libgeos_c'

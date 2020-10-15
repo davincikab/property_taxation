@@ -38,6 +38,7 @@ class ParcelInfo(models.Model):
     plot_no = models.ForeignKey(Parcels, models.DO_NOTHING, db_column='plot_no', blank=True, null=True)
     owner = models.CharField(max_length=255, blank=True, null=True)
     arrears = models.CharField(max_length=100, blank=True, null=True)
+    id_number = models.BigIntegerField("Owner Id Number", unique=True)
 
     class Meta:
         managed = False

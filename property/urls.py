@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from .views import map_view, dashboard_view, land_parcels, landing_page
 
 app_name = "property"
+
 urlpatterns = [
     path("", landing_page, name="landing"),
     path("map/", map_view, name="map"),

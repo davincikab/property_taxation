@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
-{% load road_tags %}
 {% load static %}
 {% block title %} Profile {% endblock %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <style>
+        .navbar {
+            width: 100%;
+        }
+
+        .container {
+            margin-top: 80px;
+        }
         .img-section {
             display: flex;
             flex-direction: column;
@@ -35,38 +41,28 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
+{% include '../navbar.html' %}
+    <div class="container">
         <div class="row py-4 bg-light">
             <div class="col-md-4 img-section">
-                <img src="{{ profile.profile_pic.url }}" alt="user" class="img-thumbnail">
+                <img src="{{ profile.image.url }}" alt="user" class="img-thumbnail">
                 
-                <h5>{{ profile.user.username|capfirst }}</h5>
+                <h5>{{ profile.user.first_name|capfirst }}</h5>
                 <a href="{% url 'user:create-profile' %}" class="btn btn-brand mt-2">Update Profile </a>
             </div>
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="section-info">
-                            <h5> Personal Information </h5>
                             <p class="account-info text-small"><b>Name</b> {{ profile.user.username }}</p>
                             <p class="account-info text-small"><b>Email</b> {{ profile.user.email }}</p>
                             <p class="account-info text-small"><b>Phone Number</b> {{ profile.phone_number }}</p>
-                            <p class="account-info text-small"><b>Id Number</b> {{ profile.id_number }}</p>
-                        </div>
-    
-                        <div class="section-info">
-                            <h5> Profession Information </h5>
-                            <p class="account-info text-small"><b>Profession</b> {{ profile.get_employee_status_display }}</p>
-                            <p class="account-info text-small"><b>Department</b> {{ profile.department }}</p>
+                            <p class="account-info text-small"><b>Id Number</b> {{ profile.user.id_number }}</p>
                         </div>
                     </div>
                     
                     <div class="col-md-6">
                         <div class="section-info">
-                            <h5> Location Information </h5>
-                            <p class="account-info text-small"><b>Ward</b> {{ profile.ward }}</p>
-                            <p class="account-info text-small"><b>Constituency</b> {{ profile.constituency }}</p> 
-                            <p class="account-info text-small"><b>Ward</b> {{ profile.county }}</p>   
                         </div>
                     </div>                   
                 </div>

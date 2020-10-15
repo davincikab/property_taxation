@@ -9,7 +9,8 @@ class User(AbstractUser):
     first_name = models.CharField("First Name", max_length=50)
     last_name = models.CharField("Last Name", max_length=50)
     surname = models.CharField("Surname", max_length=50)
-    id_number = models.BigIntegerField("ID Number", unique=True)
+    id_number = models.BigIntegerField("Id Number", unique=True)
+    is_taxpayer = models.BooleanField("Tax Payer", default=False)
 
 
     USERNAME_FIELD = 'username'
@@ -20,15 +21,16 @@ class User(AbstractUser):
         return self.username
     
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField("Profile Picture", upload_to="", default="")
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField("Profile Picture", upload_to="profile_picture", default="user.png")
+    phone_number = models.CharField("Phone Number", max_length=13, null=True)
 
     class Meta:
         verbose_name = "User Profile"
         verbose_name_plural = "User Profiles"
 
     def __str__(self):
-        return self.name
+        return self.user.username
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

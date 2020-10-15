@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Map {% endblock %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/mpesa.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include '../navbar.html' %}
+<div class="home">
+   <h2 class="bold text-white">LIPA NA MPESA</h2>
+
+   Amount
+   Phone Number
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

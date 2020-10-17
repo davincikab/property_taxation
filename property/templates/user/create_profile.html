@@ -15,8 +15,44 @@
   .container {
       margin-top: 80px;
   }
+  .spinner {
+            position: absolute;
+            top:0;
+            left:0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #a3a3a36b;
+        }
+
+        .spinner div i {
+            font-size: 2em;
+            font-size: 2.5em;
+            color: var(--primary);
+            animation-name: spin;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform:rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
 </style>
 {% include '../navbar.html' %}
+<div class="spinner d-none">
+  <div class="">
+      <i class="fa fa-spinner"></i>
+  </div>
+</div>
 <div class="container-fluid my-5 d-flex justify-content-center">
     <div class="col-md-6">
         <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -68,4 +104,11 @@
 
 {% block javascript %}
 <script src="{% static 'js/addControlClass.js' %}"></script>
+<script>
+  // spinner to indicate an action
+  $('#payment_form').on("submit", function(e) {
+      // load the spinner
+      $('.spinner').toggleClass('d-none');
+  });
+</script>
 {% endblock %}

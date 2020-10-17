@@ -40,6 +40,8 @@
         .messages {
             list-style: none;
         }
+
+        
     </style>
 {% endblock %}
 
@@ -115,4 +117,15 @@
 {% endblock %}
 {% block javascript %}
 <script src="{% static 'js/addControlClass.js' %}"></script>
+<script>
+    let url = window.location;
+    if(location.search) {
+        $('.spinner').toggleClass('d-none');
+
+        setTimeout(function(e){
+            $('.spinner').toggleClass('d-none');
+            window.location.assign("/user/account/");
+        }, 3000);
+    }
+</script>
 {% endblock %}

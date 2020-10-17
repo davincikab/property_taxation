@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load property_tags %}
 {% load static %}
 {% block title %} Map {% endblock %}
 
@@ -45,7 +46,7 @@
                     <div class="card text-center">
                         <div class="card-body">
                           <h5 class="card-title">
-                            {{ collected.total }}
+                            {{ collected.total|money }}
                           </h5>
                         </div>
                         <div class="card-footer text-white">
@@ -58,7 +59,7 @@
                     <div class="card text-center">
                         <div class="card-body">
                           <h5 class="card-title">
-                            {{ arrears.total }}
+                            {{ arrears.total|money }}
                           </h5>
                         </div>
                         <div class="card-footer text-white">

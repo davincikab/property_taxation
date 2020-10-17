@@ -78,7 +78,7 @@ def lipa_na_mpesa(request, plot_no, amount):
                 "PartyA": int(phone_number),
                 "PartyB": LipaNaMpesa.BusinessShortCode,
                 "PhoneNumber": int(phone_number),
-                "CallBackURL": f"{NGROK_URL}/api/c2b/callback/?id_number={id_number}",
+                "CallBackURL": f"{NGROK_URL}/api/c2b/callback/?id_number={id_number}&plot_no={plot_no}",
                 "AccountReference": "Lipa Tax",
                 "TransactionDesc": text_description
             }
@@ -138,9 +138,10 @@ def call_back(request):
         transaction_code = metadata[1]['Value']
         value = metadata[0]['Value']
         id_number = request.GET.get('id_number')
+        plot_no = request.GET.get('id_number')
 
         # update the parcelInfo
-        parcel_info = ParcelInfo.objects.get(id_number = id_number)
+        parcel_info = ParcelInfo.objects.get(parcel = plot_no)
 
         balance = int(parcel_info.arrears) - int(value)
         parcel_info.arrears = balance

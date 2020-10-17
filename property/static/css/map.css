@@ -188,6 +188,14 @@ label {
     align-items: center;
 }
 
+
+.visual-control {
+    background-color: white;
+    padding: 0.5em 0.25em;
+    border-radius: 0.4em;
+    width: 100px;
+}
+
 @media (min-width:50em) {
     .search-section {
         width: 30%;

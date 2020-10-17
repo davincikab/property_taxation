@@ -1,18 +1,18 @@
-var ctxLine = document.getElementById('contribution-chart').getContext('2d');
+var ctxLine = document.getElementById('collection-per-zone').getContext('2d');
 
-var roadsChart = new Chart(ctxLine, {
-    type: 'line',
+var collectionPerZoneChart = new Chart(ctxLine, {
+    type: 'bar',
     data: {
-        labels:["2013", "2014", "2015", "2016", "2017"],
+        labels:[],
         datasets:[{
-            data:[2, 5, 10, 25, 15],
-            backgroundColor:"#36384480"
+            data:[],
+            backgroundColor:"#0F4C5C95"
         }]
     },
     options: {
         title: {
             display: true,
-            text: 'Road Construction'
+            text: 'Arrears Per Zone'
         },
         legend: {
             display: false,
@@ -24,7 +24,7 @@ var roadsChart = new Chart(ctxLine, {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    stepSize: 1
+                    stepSize: 2500
                 }
             }],
             xAxes:[{
@@ -38,22 +38,22 @@ var roadsChart = new Chart(ctxLine, {
 });
 
 // Maintenace chart
-var ctxLine = document.getElementById('maintenance-chart').getContext('2d');
+var paymentMode = document.getElementById('payment-mode').getContext('2d');
 
-var maintenanceChart = new Chart(ctxLine, {
-    type: 'line',
+var paymentModeChart = new Chart(paymentMode, {
+    type: 'bar',
     data: {
-        labels:["2013", "2014", "2015", "2016", "2017"],
+        labels:[],
         datasets:[{
-            label: "# of Maintenance",
-            data:[8, 10, 3, 7, 1],
-            backgroundColor:"#36384480"
+            label: "Payment Mode",
+            data:[],
+            backgroundColor:"#0F4C5C98"
         }]
     },
     options: {
         title: {
             display: true,
-            text: 'Road Maintenance'
+            text: 'Payment Mode'
         },
         legend: {
             display: false,
@@ -65,7 +65,7 @@ var maintenanceChart = new Chart(ctxLine, {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    stepSize: 1
+                    stepSize: 10
                 }
             }]
         }
@@ -73,22 +73,22 @@ var maintenanceChart = new Chart(ctxLine, {
 });
 
 // structure-chart
-var ctxLine = document.getElementById('structure-chart').getContext('2d');
+var collecitonHistory = document.getElementById('collection-history').getContext('2d');
 
-var roadStructureChart = new Chart(ctxLine, {
-    type: 'bar',
+var collectionHistoryChart = new Chart(collecitonHistory, {
+    type: 'line',
     data: {
-        labels:["NULL", "base", "Pavement", "Bitumen", "Sub base"],
+        labels:[],
         datasets:[{
-            label: "Road Structure",
-            data:[8, 10, 12, 7, 10],
-            backgroundColor:'#EC877B'
+            label: "Collection History",
+            data:[],
+            backgroundColor:'#0F4C5C78'
         }]
     },
     options: {
         title: {
             display: true,
-            text: 'Road Structure'
+            text: 'Tax History'
         },
         legend: {
             display: false,
@@ -96,42 +96,42 @@ var roadStructureChart = new Chart(ctxLine, {
                 fontColor: 'rgb(255, 99, 132)'
             }
         },
-    }
-});
-
-// structure-chart
-var ctxLine = document.getElementById('surface-chart').getContext('2d');
-
-var roadSurfaceChart = new Chart(ctxLine, {
-    type: 'bar',
-    data: {
-        labels:["NULL", "Asphalt", "Earth", "Murram", "Paved", "Unpaved"],
-        datasets:[{
-            label: "Road Surface",
-            data:[8, 10, 12, 7, 10, 4],
-            backgroundColor: "#EC877B"
-        }]
-    },
-    options: {
-        title: {
-            display: true,
-            text: 'Road Surface'
-        },
-        legend: {
-            display: false,
-            labels: {
-                fontColor: 'rgb(255, 99, 132)'
-            }
-        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    stepSize: 10
+                }
+            }]
+        }
     }
 });
 
 // load the data
-fetch("/dashboard_data/")
+fetch("/graph_data/")
 .then(response => {
     return response.json();
 })
 .then(data => {
+    console.log(data);
+    let {arrear, collection, payment_mode } = data;
+
+    // 
+    console.log(collection.map(ar => Object.values(ar)[0]));
+    collectionHistoryChart.data.labels = collection.map(ar => Object.keys(ar)[0]);
+    collectionHistoryChart.data.datasets[0].data = collection.map(ar => Object.values(ar)[0]);
+    collectionHistoryChart.update();
+
+    // arrear
+    paymentModeChart.data.labels = payment_mode.map(ar => Object.keys(ar)[0]);
+    paymentModeChart.data.datasets[0].data = payment_mode.map(ar => Object.values(ar)[0]);
+    paymentModeChart.update();
+
+    // arrear
+    console.log(arrear.map(ar => Object.keys(ar)[0]));
+    collectionPerZoneChart.data.labels = arrear.map(ar => Object.keys(ar)[0]);
+    collectionPerZoneChart.data.datasets[0].data = arrear.map(ar => Object.values(ar)[0]);
+    collectionPerZoneChart.update();
 
 })
 .catch(error => {

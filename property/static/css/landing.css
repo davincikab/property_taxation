@@ -1,10 +1,11 @@
 .navbar {
     background-color: transparent !important;
+    z-index: 1;
 }
 
 .navbar-brand {
     font-size: 1.5em;
-    color:var(--brand-cta) !important;
+    color:var(--white) !important;
 }
 
 .nav-item {
@@ -35,9 +36,12 @@
 }
 
 .home {
+    position: absolute;
+    top: 0;
+    width: 100%;
     background-image: url(/media/property.jpg);
     height: 100vh;
-    margin-top: -80px;
+    /* margin-top: -80px; */
     background-size: cover;
     background-color: #404040;
     background-blend-mode: soft-light;

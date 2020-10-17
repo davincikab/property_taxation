@@ -13,14 +13,16 @@
         <div class="col-xs-12 col-sm-2">
             {% include '../sidenav.html' %}
         </div>
-        <div class="col-xs-12 col-sm-10">
+        <div class="col-xs-12 col-sm-10 kpis">
             <div class="row px-3">
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                          <h5 class="card-title">50</h5>
+                          <h5 class="card-title">
+                            {{ parcels_count }}
+                          </h5>
                         </div>
-                        <div class="card-footer text-muted">
+                        <div class="card-footer text-white">
                           Parcels
                         </div>
                     </div>
@@ -29,9 +31,11 @@
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                          <h5 class="card-title">100</h5>
+                          <h5 class="card-title">
+                            {{ owner_count }}
+                          </h5>
                         </div>
-                        <div class="card-footer text-muted">
+                        <div class="card-footer text-white">
                           Parcel Owner
                         </div>
                     </div>
@@ -40,9 +44,11 @@
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                          <h5 class="card-title">50 M</h5>
+                          <h5 class="card-title">
+                            {{ collected.total }}
+                          </h5>
                         </div>
-                        <div class="card-footer text-muted bg-primary">
+                        <div class="card-footer text-white">
                           Collected
                         </div>
                     </div>
@@ -51,9 +57,11 @@
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                          <h5 class="card-title">5M</h5>
+                          <h5 class="card-title">
+                            {{ arrears.total }}
+                          </h5>
                         </div>
-                        <div class="card-footer text-muted">
+                        <div class="card-footer text-white">
                           Pending
                         </div>
                     </div>
@@ -62,13 +70,18 @@
             </div>
     
             <div class="row">
-                <div class="col-md-6">
-                    <canvas id="contribution-chart"></canvas>
+                <div class="col-md-8">
+                    <canvas id="collection-per-zone"></canvas>
+                </div>
+                <div class="col-md-4">
+                  <canvas id="payment-mode"></canvas>
                 </div>
             </div>
     
             <div class="row">
-    
+              <div class="col-md-12">
+                <canvas id="collection-history"></canvas>
+              </div>
             </div>
             </div>
       </div>

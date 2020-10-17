@@ -10,7 +10,39 @@
 {% block content %}
 {% include '../navbar.html' %}
 <div class="home">
-   <h2 class="bold text-white">MY PROPERTY TAX ASSISTANT</h2>
+    <div>
+        <h2 class="bold text-white text-white">MY PROPERTY TAX ASSISTANT</h2>
+        <form action="" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" id="plot_no" name="plot_no" placeholder="Search by Plot Number ... ">
+            </div>
+        </form>
+
+        <!-- parcel info -->        
+        {% if parcel and parcel != 'None' %} 
+           <div class="bg-white">
+               <table class="table">
+                    <tr>
+                        <td>Plot No {{parcel.parcel.plot_no}}</td>
+                        <td>Arrears Ksh {{parcel.arrears }}</td>
+                        <td></td>
+
+                        {% if parcel.arrears > 0 %}
+                            <td>
+                                <a href="{% url 'mpesa:lipa-mpesa' parcel.parcel.plot_no parcel.arrears %}" 
+                                class="btn btn-sm btn-cta">Pay Your Arrears</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+               </table>
+              
+           </div>
+        {% elif parcel == 'None' %}
+           <p class="text-danger">No parcel with such number</p>
+        {% else %}
+        {% endif %}
+
+    </div>
 </div>
 {% endblock %}
 

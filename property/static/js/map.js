@@ -56,6 +56,13 @@ function styleByArrears(feature) {
         : arrear <= 2500 ? colors[4] : arrear <= 3000 ? colors[5] : colors[6];
 }
 
+function styleByClearance(feature) {
+    let colors = ['#e41a1c','#377eb8','#4daf4a']
+    let is_cleared = feature.properties ? feature.properties.is_cleared: feature;
+
+    return !is_cleared ? colors[0] : colors[2];
+}
+
 var parcels = L.geoJSON(null, {
     style:function(feature){
         return {
@@ -106,17 +113,17 @@ legendControl.onAdd = function(map) {
     div.innerHTML = '<button class="btn btn-block bg-light text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">'+
     'Legend<span>+</span></button>';
 
-    let legendContent = "";
-    let arrearValues = [500, 1000, 1500, 2000, 2500, 3000, 3500, 5000];
-    arrearValues.forEach((value, i) => {
-        let color = styleByArrears(value);
+    // let legendContent = "";
+    // let arrearValues = [500, 1000, 1500, 2000, 2500, 3000, 3500, 5000];
+    // arrearValues.forEach((value, i) => {
+    //     let color = styleByArrears(value);
 
-        let text = value < 3500 ? "&lt; " + value : "&gt; "+ 3500;
-        legendContent += "<div class='legend_wrapper'><div class='legend-item' style='background-color:"+color+"'></div><span>"+text+" Ksh</span></div>";
-    });
+    //     let text = value < 3500 ? "&lt; " + value : "&gt; "+ 3500;
+    //     legendContent += "<div class='legend_wrapper'><div class='legend-item' style='background-color:"+color+"'></div><span>"+text+" Ksh</span></div>";
+    // });
 
 
-    div.innerHTML += '<div class="collapse" id="collapseOne">'+legendContent+'</div>';
+    div.innerHTML += '<div class="collapse" id="collapseOne"></div>';
 
     return div;
 }
@@ -212,7 +219,7 @@ function listEventListener(e) {
 
 // // layer control
 var overlay = {
-    "Roads":parcels,
+    "Parcels":parcels,
 };
 
 var baseLayer = {
@@ -222,3 +229,92 @@ var baseLayer = {
 
 L.control.layers(baseLayer, overlay, {collapsed:true}).addTo(map);
 
+
+// Visualize by those cleared
+var visualTypeControl = new L.Control({position:"topright"});
+visualTypeControl.onAdd = function(map) {
+    let div = L.DomUtil.create('div', 'visual-control');
+    let visualType = ['Arrears', 'Clearance'];
+
+    div.innerHTML += '<div class="form-check">'+
+    '<input class="form-check-input position-static" type="radio" name="visual" value="arrear" aria-label="..." checked>'+
+    '<label class="form-check-label">Arrear</label></div> <div class="form-check">'+
+    '<input class="form-check-input position-static" type="radio" name="visual" id="blankRadio1" value="clearance" aria-label="...">'+
+    '<label class="form-check-label">Clearance</label>'+
+    '</div>';
+
+    return div;
+}
+
+visualTypeControl.addTo(map);
+addListener();
+
+// event listener for visual type change
+function addListener() {
+    let radioVisual = document.querySelectorAll('.form-check-input');
+    console.log(radioVisual);
+    
+    radioVisual.forEach(visual => {
+        visual.addEventListener('click', function(e) {
+            let value = e.target.value;
+            changeVisual(value);
+        });
+    });
+}
+
+function changeVisual(value) {
+    if(value == 'clearance') {
+        parcels.eachLayer(layer => {
+            layer.setStyle({
+                fillColor:styleByClearance(layer.feature)
+            });
+        });
+
+        legendClearance();
+    } else {
+        parcels.eachLayer(layer => {
+            layer.setStyle({
+                fillColor:styleByArrears(layer.feature)
+            });
+        });
+
+        legendArrears();
+    }
+}
+
+function legendArrears() {
+    // get 
+    let collapse = document.getElementById('collapseOne');
+    let legendContent = "";
+    let arrearValues = [500, 1000, 1500, 2000, 2500, 3000, 3500, 5000];
+    arrearValues.forEach((value, i) => {
+        let color = styleByArrears(value);
+
+        let text = value < 3500 ? "&lt; " + value : "&gt; "+ 3500;
+        legendContent += "<div class='legend_wrapper'><div class='legend-item' style='background-color:"+color+"'></div><span>"+text+"</span></div>";
+    });
+
+    collapse.innerHTML = legendContent;
+
+}
+
+function legendClearance() {
+    let collapse = document.getElementById('collapseOne');
+    let values = [true, false];
+
+    let legendContent = "";
+    values.forEach(value => {
+        let color = styleByClearance(value);
+
+        let text = value ? "Cleared" : "Pending Clearance";
+        legendContent += "<div class='legend_wrapper'><div class='legend-item' style='background-color:"+color+"'></div><span>"+text+" Ksh</span></div>";
+    });
+
+    collapse.innerHTML = legendContent
+
+}
+
+legendArrears();
+
+
+// listen to control 

@@ -30,6 +30,7 @@ class ProfileCreateView(LoginRequiredMixin, FormView):
             profile = model_to_dict(user)
         
         return profile
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,7 +41,7 @@ class ProfileCreateView(LoginRequiredMixin, FormView):
 
         try:
             profile = UserProfile.objects.get(user=self.request.user)
-            form = ProfileForm(self.request.POST or None, self.request.FILES, instance=profile)
+            form = self.form_class(self.request.POST or None, self.request.FILES, instance=profile)
             form.save()
         except UserProfile.DoesNotExist:
             profile.user = self.request.user

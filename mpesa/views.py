@@ -55,6 +55,11 @@ def lipa_na_mpesa(request, plot_no, amount):
     api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
     headers = {"Authorization": "Bearer %s" % access_token}
 
+    # check if the parcels are registered to user
+    parcel = ParcelInfo.objects.get(parcel = plot_no)
+    if parcel.id_number != request.user.id_number:
+        messages.warning(request, f'Parcel with Plot Number {plot_no} not registered to you.')
+        return redirect('/user/account/')
     if request.method == "POST":
         # validate the form
         form = MpesaPaymentForm(request.POST)
@@ -89,7 +94,7 @@ def lipa_na_mpesa(request, plot_no, amount):
             # redirect if success
             messages.success(request, "Payment Processing")
             return redirect('/user/account/?payment=true')
-    else:
+    else: 
         # pass user data
         initial_data = {
             'amount':amount,

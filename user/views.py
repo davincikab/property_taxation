@@ -9,6 +9,8 @@ from django.forms.models import model_to_dict
 from .forms import UserCreateForm, ProfileForm, UserDetailsForm
 from .models import UserProfile, User
 
+from property.models import ParcelInfo
+
 class ProfileCreateView(LoginRequiredMixin, FormView):
     login_url = "/user/login/"
     model = UserProfile
@@ -20,6 +22,8 @@ class ProfileCreateView(LoginRequiredMixin, FormView):
         user = User.objects.get(username = self.request.user.username)
         try:
             profile = UserProfile.objects.get(user=self.request.user)
+
+            # get plot info 
 
             profile = {**model_to_dict(profile), **model_to_dict(user)}
         except UserProfile.DoesNotExist:
@@ -36,10 +40,11 @@ class ProfileCreateView(LoginRequiredMixin, FormView):
 
         try:
             profile = UserProfile.objects.get(user=self.request.user)
-            form = ProfileForm(self.request.POST or None, instance=profile)
+            form = ProfileForm(self.request.POST or None, self.request.FILES, instance=profile)
             form.save()
         except UserProfile.DoesNotExist:
             profile.user = self.request.user
+            profile.image = self.request.FILES
             profile.save()
 
         print('Valid')
@@ -70,6 +75,8 @@ class UserCreateView(FormView):
 
     def form_valid(self, form):
         form.save()
+
+        # update the user names from parcels db
         return redirect(self.success_url)
 
 
@@ -81,6 +88,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         try:
             context["profile"] = UserProfile.objects.get(user = self.request.user)
+            context['parcels'] = ParcelInfo.objects.filter(id_number = self.request.user.id_number)
         except UserProfile.DoesNotExist:
             context["profile"] = {}
         

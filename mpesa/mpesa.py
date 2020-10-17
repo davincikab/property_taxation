@@ -20,13 +20,16 @@ class MpesaAccessToken:
     )
 
     # return the access token
-    json_response = json.loads(req.text)
-    validated_access_token =json_response['access_token']
+    try:
+        json_response = json.loads(req.text)
+    except json.decoder.JSONDecodeError:
+        json_response = {'access_token':''}
+    validated_access_token = json_response['access_token']
 
 # lipa na mpesa
 class LipaNaMpesa:
     BusinessShortCode = "174379"
-    C2BShortCode = "3848"
+    c2bShortCode = "600610"
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
     passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
 

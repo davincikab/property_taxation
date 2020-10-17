@@ -5,7 +5,7 @@ class Parcels(models.Model):
     geom = models.MultiPolygonField(srid=3857, blank=True, null=True)
     plot_no = models.BigIntegerField(primary_key=True)
     owner = models.CharField(max_length=50, blank=True, null=True),
-    zone = models.CharField("Parcel Zone", max_length=50, default="D")
+    zone = models.CharField("Parcel Zone", max_length=50, default="Zone A")
 
     class Meta:
         managed = False
@@ -17,28 +17,33 @@ class TaxationHistory(models.Model):
         ('Bank', "Bank")
     )
 
-    plot_no = models.BigIntegerField(null=False, blank="")
+    # parcel = models.ForeignKey(Parcels, db_column='plot_no', on_delete=models.CASCADE)
+    plot_no = models.BigIntegerField(blank=True, null=True)
     payed_on = models.DateTimeField("Payed On", auto_now=False, auto_now_add=False)
     is_waived = models.BooleanField("Waiver", default=False)
     payment_mode = models.CharField("Payment Method", max_length=50, choices=PAYMENT_MODE)
-    # amount = models.IntegerField("Amount Payed", blank=True, null=True)
+    amount = models.IntegerField("Amount", blank=True, null=True)
+    balance = models.IntegerField("Arrear",default=0)
+    transaction_id = models.CharField("Transaction Id", max_length=50)
+    id_number = models.IntegerField("Id Number")
 
     class Meta:
         verbose_name = "Tax History"
         verbose_name_plural = "Tax History"
 
     def __str__(self):
-        return self.plot_no
+        return self.transaction_id
 
     # def get_absolute_url(self):
     #     return reverse("_detail", kwargs={"pk": self.pk})
 
 class ParcelInfo(models.Model):
     id = models.IntegerField(primary_key=True)
-    plot_no = models.ForeignKey(Parcels, models.DO_NOTHING, db_column='plot_no', blank=True, null=True)
+    parcel = models.OneToOneField(Parcels, db_column='plot_no', blank=True, null=True, on_delete=models.CASCADE)
     owner = models.CharField(max_length=255, blank=True, null=True)
     arrears = models.CharField(max_length=100, blank=True, null=True)
-    id_number = models.BigIntegerField("Owner Id Number", unique=True)
+    is_cleared = models.BooleanField("Arrears Cleared", default=False)
+    id_number = models.BigIntegerField("Owner Id Number", unique=False)
 
     class Meta:
         managed = False

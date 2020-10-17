@@ -20,6 +20,9 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
     
+    def get_full_name(self):
+        return self.first_name +" " + self.last_name + " " + self.surname
+    
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField("Profile Picture", upload_to="profile_picture", default="user.png")

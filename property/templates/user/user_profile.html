@@ -37,36 +37,77 @@
             font-weight: 600;
             color: var(--brand-color);
         }
+        .messages {
+            list-style: none;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
 {% include '../navbar.html' %}
     <div class="container">
+        <!-- display payment messages -->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="alert alert-{{ message.tags }}">
+                    {{ message|safe }}
+                    <a href="#" class="close">x</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="row py-4 bg-light">
             <div class="col-md-4 img-section">
                 <img src="{{ profile.image.url }}" alt="user" class="img-thumbnail">
                 
                 <h5>{{ profile.user.first_name|capfirst }}</h5>
-                <a href="{% url 'user:create-profile' %}" class="btn btn-brand mt-2">Update Profile </a>
+                <a href="{% url 'user:create-profile' %}" class="btn btn-sm btn-cta mt-2">Update Profile </a>
             </div>
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="section-info">
-                            <p class="account-info text-small"><b>Name</b> {{ profile.user.username }}</p>
+                            <h5>Personal Information</h5>
+                            <p class="account-info text-small"><b>Name</b> {{ profile.user.get_full_name }}</p>
                             <p class="account-info text-small"><b>Email</b> {{ profile.user.email }}</p>
                             <p class="account-info text-small"><b>Phone Number</b> {{ profile.phone_number }}</p>
                             <p class="account-info text-small"><b>Id Number</b> {{ profile.user.id_number }}</p>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-6">
+
                         <div class="section-info">
-                            <h5>Online Payment</h5>
-                            <a href="" class="btn">Pay Your Arrears</a>
+                            {% if user.is_taxpayer %}
+                            <!-- plot information -->
+                            <h5>Property Information</h5>
+                            <table class="table">
+                                <tr>
+                                    <th>Plot Number</th>
+                                    <th>Zone</th>
+                                    <th>Arrears</th>
+                                    <th>Payment Status</th>
+                                </tr>
+
+                                {% for parcel in parcels %}
+                                    <tr>
+                                       <td>{{ parcel.parcel.plot_no }}</td>
+                                       <td>{{ parcel.parcel.zone }}</td>
+                                       <td>{{ parcel.arrears }}</td>
+                                       {% if parcel.arrears > 0 %}
+                                            <td> 
+                                                <a href="{% url 'mpesa:lipa-mpesa' parcel.parcel.plot_no parcel.arrears %}" 
+                                                class="btn btn-sm btn-cta">Pay Your Arrears</a></td>
+                                        {% else %}
+                                            <td>
+                                                <i class="fa fa-check-circle"></i>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                           {% endif %}
                         </div>
-                    </div>                   
+                    </div>
+                      
                 </div>
             </div>
         </div>

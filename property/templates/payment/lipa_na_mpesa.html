@@ -1,22 +1,53 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Map {% endblock %}
+{% block title %} Pay Arrears {% endblock %}
 
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/mpesa.css' %}">
+    <style>
+        .navbar {
+            box-shadow: 1px 1px 0.5em var(--light-gray);
+        }
+        .home {
+            display: flex;
+            align-items: center;
+            margin-top: 4em;
+            justify-content: center;
+        }
+
+        .home div {
+            min-width: 30%;
+            box-shadow: 1px 1px 0.2em var(--light-gray);
+            padding: 1em;
+        }
+    </style>
+
 {% endblock %}
 
 {% block content %}
 {% include '../navbar.html' %}
-<div class="home">
-   <h2 class="bold text-white">LIPA NA MPESA</h2>
+<div class="home ">
+    <div class="">
+        <p class="bold">LIPA NA MPESA</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field.label }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="text-small">{{field.help_text}}</small><br>
+                {% endif %}
+            {% endfor %}
+          
 
-   Amount
-   Phone Number
+            <button type="submit" class="btn btn-cta w-100 mt-3">Pay Arrear</button>
+            
+        </form>
+    </div>
 </div>
 {% endblock %}
 
 {% block javascript %}
-
+<script src="{% static 'js/addControlClass.js' %}"></script>
 {% endblock %}

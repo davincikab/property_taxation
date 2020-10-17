@@ -18,7 +18,14 @@ class ProfileForm(forms.ModelForm):
     last_name = forms.CharField(label="Last Name", max_length=50, required=False)
     surname = forms.CharField(label="Surname", max_length=50, required=False)
     email = forms.EmailField(label="Email", required=False)
-    phone_number = forms.CharField(label="Phone Number", max_length=13, required=False)
+    phone_number = forms.CharField(
+        label="Phone Number", max_length=13, required=False,
+        help_text="Phone Number format: 254700111222",
+        widget=forms.TextInput(attrs={
+            'placeholder':'254700111222',
+            'pattern':r'254[0-9]{9}'
+        })
+    )
     
     class Meta:
         model = UserProfile

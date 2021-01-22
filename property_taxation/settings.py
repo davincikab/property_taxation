@@ -14,7 +14,7 @@ SECRET_KEY = 'oz#90$tglp&vo44x+gq8o#z6q$*(s24&+yhc!2y&!l2v*6dqbi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['4eaef5c97567.ngrok.io', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['0b9b96924fa7.ngrok.io', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -124,5 +124,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "property/static")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
-GDAL_LIBRARY_PATH = 'C:/OSGeo4W64/bin/gdal204'
-GEOS_LIBRARY_PATH = 'C:/Program Files/PostgreSQL/12/bin/libgeos_c'
+# GDAL_LIBRARY_PATH = 'C:/OSGeo4W64/bin/gdal204'
+# GEOS_LIBRARY_PATH = 'C:/Program Files/PostgreSQL/12/bin/libgeos_c'

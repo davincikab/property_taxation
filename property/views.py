@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Sum
+from django.views.decorators.csrf import csrf_exempt
 
 # serializer
 from django.core.serializers import serialize
@@ -74,5 +75,35 @@ def land_parcels(request):
 class ParcelDetail():
     pass
 
+@csrf_exempt
+def ussd_callback(request):
+    response = ""
+    if request.method == "POST":
+        session_id = request.POST.get("sessionId", None)
+        service_code = request.POST.get("serviceCode", None)
+        phone_number = request.POST.get("phoneNumber", None)
+        text = request.POST.get("text", "default")
 
+        if text == "":
+            response += "CON Input Your Id Number"
+        elif text == "0":
+            response = "END"
+        elif text != "":
+            try:
+                id_number = int(text)
 
+                # get the land with the given Id
+                parcels = ParcelInfo.objects.filter(id_number=id_number)
+
+                if len(parcels) == 0:
+                    response += "END No Land Registered with this " + str(id_number) + " number"
+                else:
+                    response += "END Land Rates Arrears for " + str(id_number) + ".\n"
+                    for parcel in parcels:
+                        print(parcel.parcel.plot_no)
+                        response += "LR No. " + str(parcel.parcel.plot_no) + " has Ksh " + str(parcel.arrears) + " not paid.\n"
+            except ValueError:
+                response += "CON Invalid Input. Try Again"
+        
+        return HttpResponse(response)
+            

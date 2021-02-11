@@ -9,5 +9,5 @@ class TaxationHistoryAdmin(admin.ModelAdmin):
 
 @admin.register(ParcelInfo)
 class ParcelInfoAdmin(admin.ModelAdmin):
-    list_display = ('parcel','id_number', 'id_number', 'arrears', 'owner')
+    list_display = ('parcel','id_number', 'phone_number', 'arrears', 'owner')
     list_fileter = ('is_cleared')

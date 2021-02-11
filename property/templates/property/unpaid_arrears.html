@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Map {% endblock %}
+
+
+{% block style %}
+<style>
+    .navbar {
+        box-shadow: 2px 1px 0.5em var(--gray);
+    }
+    .header-section {
+        align-items: center;
+        justify-content: space-between;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container mt-2">
+    <div class="header-section d-flex">
+        <h5>Individuals With Unpaid Arrears</h5>
+        <form action="" class="my-2" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Arrears</th>
+            <th scope="col">Phone Number</th>
+            <th>Id Number</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for parcel in parcels %}
+                <tr>
+                    <td>{{ parcel.id }}</td>
+                    <td>{{ parcel.owner }}</td>
+                    <td>{{ parcel.arrears }}</td>
+                    <td>{{ parcel.phone_number }}</td>
+                    <td>{{ parcel.id_number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    // add a spinner to indicate SMS being sent
+</script>
+{% endblock %}
+
+<!-- look on pagination -->

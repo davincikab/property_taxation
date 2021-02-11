@@ -23,7 +23,7 @@ class TaxationHistory(models.Model):
     is_waived = models.BooleanField("Waiver", default=False)
     payment_mode = models.CharField("Payment Method", max_length=50, choices=PAYMENT_MODE)
     amount = models.IntegerField("Amount", blank=True, null=True)
-    balance = models.IntegerField("Arrear",default=0)
+    balance = models.IntegerField("Arrear", default=0)
     transaction_id = models.CharField("Transaction Id", max_length=50)
     id_number = models.IntegerField("Id Number")
 
@@ -44,6 +44,7 @@ class ParcelInfo(models.Model):
     arrears = models.CharField(max_length=100, blank=True, null=True)
     is_cleared = models.BooleanField("Arrears Cleared", default=False)
     id_number = models.BigIntegerField("Owner Id Number", unique=False)
+    phone_number = models.CharField("Phone Number", max_length=15, blank=True)
 
     class Meta:
         managed = False
